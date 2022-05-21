@@ -102,15 +102,13 @@ def genere_laby() -> None:
     temps = 1000
     while NUMBER_TURNS != LENGTH*HEIGHT-1:
         i, j = randint(0, HEIGHT-1), randint(0, LENGTH-1)
-        if i == HEIGHT-1 and j != LENGTH-1:
-            if coords[i][j]["D"] == True:
-                wall_break(coords[i][j], "D")
-        elif j == LENGTH-1 and i != HEIGHT-1:
-            if coords[i][j]["B"] == True:
-                wall_break(coords[i][j], "B")
+        if i == HEIGHT-1 and j != LENGTH-1 and coords[i][j]["D"]:
+            wall_break(coords[i][j], "D")
+        elif i != HEIGHT - 1 and j == LENGTH-1 and coords[i][j]["B"]:
+            wall_break(coords[i][j], "B")
         elif i != HEIGHT-1 and j != LENGTH-1:
             pos = choice(["B", "D"])
-            if coords[i][j][pos] == True:
+            if coords[i][j][pos]:
                 wall_break(coords[i][j], pos)
         fen.after(temps, trace_laby)
         temps = temps + 500
