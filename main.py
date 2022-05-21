@@ -1,25 +1,11 @@
 from tkinter import*
-import random as choice
-from random import*
-import sys
+from random import choice,randint
 
 
-LENGTH = 5
-HEIGHT = 4
-TILE_SIZE = 100
-Y = HEIGHT * TILE_SIZE
-X = LENGTH * TILE_SIZE
-BACKGROUND_COLOR = "light yellow"
-LINE_COLOR = "black"
-NUMBER_TURNS = 0
 
 
-def exit():
-    '''Quitte le programme'''
-    sys.exit()
 
-
-def laby(length, height):
+def laby(length:int, height:int) -> list:
     '''Initialise le labyrinthe'''
     lab = [[0]*length for k in range(height)]
     coords = [[0]*length for k in range(height)]
@@ -32,10 +18,9 @@ def laby(length, height):
     return coords
 
 
-coords = laby(LENGTH, HEIGHT)
 
 
-def trace_wall(tile):
+def trace_wall(tile:dict) -> None:
     '''Trace les contours du labyrinthe'''
     if tile["D"] == True:
         x1 = tile["coords"][1]*TILE_SIZE+TILE_SIZE
@@ -48,16 +33,9 @@ def trace_wall(tile):
                         y1+TILE_SIZE, fill=LINE_COLOR)
 
 
-dim = f"{X*2}x{Y*2}"
-fen = Tk()
-fen.geometry(dim)
-fen.title("Labyrinthe")
-fen.configure(bg='black')
-can = Canvas(fen, width=X, height=Y, bg=BACKGROUND_COLOR)
-can.pack()
 
 
-def show_perimeter():
+def show_perimeter() -> None:
     '''Trace les contours du labyrinthe'''
     can.create_line(2, 2, 2, Y, fill=LINE_COLOR)
     can.create_line(X, 2, X, Y, fill=LINE_COLOR)
@@ -65,7 +43,9 @@ def show_perimeter():
     can.create_line(2, Y, X, Y, fill=LINE_COLOR)
 
 
-def trace_laby():
+
+
+def trace_laby() -> None:
     '''Crée les nombres qui s'afficheront'''
     can.create_rectangle(0, 0, X, Y, fill=BACKGROUND_COLOR)
     for ligne in coords:
@@ -76,7 +56,9 @@ def trace_laby():
     show_perimeter()
 
 
-def adjacent(tile, position) -> dict:
+
+
+def adjacent(tile:dict, position:str) -> dict:
     '''Renvoie la case voisine et ses coordonnés en fonction de la case précédente '''
     if position == "G":
         return coords[tile["coords"][0]][tile["coords"][1]-1]
@@ -88,7 +70,9 @@ def adjacent(tile, position) -> dict:
         return coords[tile["coords"][0]+1][tile["coords"][1]]
 
 
-def wall_break(tile, position):
+
+
+def wall_break(tile:dict, position:str) -> None:
     '''Vérifie que les coordonnés de la case voisine à celle passé en parametre sont différents de celle-ci et permet de casser les murs'''
     global NUMBER_TURNS
     adjacent2 = adjacent(tile, position)
@@ -117,7 +101,9 @@ def wall_break(tile, position):
             coords[tile["coords"][0]][tile["coords"][1]]["D"] = False
 
 
-def test():
+
+
+def test() -> None:
     '''Teste la fonction wall_break'''
     for ligne in coords:
         for tile in ligne:
@@ -126,7 +112,7 @@ def test():
     return True
 
 
-def genere_laby():
+def genere_laby() -> None:
     '''Génère le labyrinthe'''
     trace_laby()
     temps = 1000
@@ -147,6 +133,27 @@ def genere_laby():
                 wall_break(coords[i][j], pos)
         fen.after(temps, trace_laby)
         temps = temps + 500
+
+
+
+LENGTH = 5
+HEIGHT = 4
+TILE_SIZE = 100
+Y = HEIGHT * TILE_SIZE
+X = LENGTH * TILE_SIZE
+BACKGROUND_COLOR = "light yellow"
+LINE_COLOR = "black"
+NUMBER_TURNS = 0
+dim = f"{X*2}x{Y*2}"
+fen = Tk()
+fen.geometry(dim)
+fen.title("Labyrinthe")
+fen.configure(bg='black')
+can = Canvas(fen, width=X, height=Y, bg=BACKGROUND_COLOR)
+can.pack()
+coords = laby(LENGTH, HEIGHT)
+
+
 
 
 genere_laby()
