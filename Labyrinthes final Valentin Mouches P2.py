@@ -1,14 +1,4 @@
-''' Devoirs maison vacanse de primptemps pour M.KUNIAN
-    Labyrinthe avec fusion aléatoire des chemins 
-    avec un affichage Tkinter utilisant  :
-    type : dict,list,int,str,float,tuples
-    fonction externe : sleep,randint,choice,tkinter *
-    nom de la fen : root
-    affichage : tkinter + shell
-labyrinthe créé par Valentin MOUCHÈS 19/04 -> 22/05'''
-
-
-from tkinter import *                                               #import
+from tkinter import *                                               
 from random import randint ,choice
 from time import sleep
 
@@ -23,7 +13,7 @@ x = 0
 
 
 
-#creation de la fenetre et de ses widjets
+
 root = Tk()                                                         
 root.geometry("700x700")
 root.minsize(200,200)
