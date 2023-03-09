@@ -43,17 +43,16 @@ def init(x:int) -> None:
 
 
 #evenement qui va initialiser tout le canvas
-#après avoir ressus l'information du nombre de cases de côté
+#après avoir reçu l'information du nombre de cases de côté
 #return le nombre de cases de longueur du tableau
 def get_entry(event) -> int:
     global x
     x = int(nb.get())   #recupère le texte du entry
-    nb.delete(0,)       #suprime le texte du entry
-    nb.destroy()        #suprime le widjets
+    nb.delete(0,)       #supprime le texte du entry
+    nb.destroy()        #supprime le widget 
     texte.destroy()     #detruit le label
     init(x)             #lance le canvas
     return x
-#on peut le tester en entrant une valeur et en la affichant dans le shell
     
 #prend en argument les abscisses et les ordonnés 
 #creer le tableau tab qui contient les id de chaque case
@@ -66,7 +65,6 @@ def init_laby(x:int,y:int) -> list:
         for k in range(len(tab[0])):
             tab_dico[i][k] = {"id" : tab[i][k], "D":True, "B" : True, "co":(i,k)}
     return tab , tab_dico
-#on peut le tester avec differente valeur de x  et de y
 
 
 #prend en argument les abscisses et les ordonnés 
@@ -80,19 +78,12 @@ def init_canvas(x:int,y:int) -> int:                                #dessine not
         Laby.create_line(0,i,600,i)                                 #dessine les ligneshorizontale                       
         Laby.create_line(i,0,i,600)                                 #dessine les ligne verticale
     return taille 
-#on peut le tester avec differente valeur de x  et de y
 
 
 
-
-#affiche plus clairement notre tableau avec les ids
-#utilise tab pour l'afficher ligne par ligne
-#return None
 def affiche_laby(tab:list) -> None:                                        
     for i in range(len(tab)):
         print(tab[i])
-# on peut tester avec plusieur tableau à 2 dimenssions
-
 
 
 def voisin(case:tuple,position:str,taille:int) -> tuple:                                 #retransmet le dico de la case voisin et les coo du mur entre les deux cases
