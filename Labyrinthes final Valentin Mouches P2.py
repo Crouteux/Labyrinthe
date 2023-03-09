@@ -129,4 +129,3 @@ print(x)
 root.bind('<Return>',get_entry)
 Laby.bind("<Button-1>", genere_laby)
 root.mainloop()
-
